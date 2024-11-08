@@ -1,6 +1,6 @@
 import sys
-from programs.model import Model, ChunkyModel
-from programs.temporal_sampling import PatternSampler
+from flowchronicle.model import Model, ChunkyModel
+from flowchronicle.temporal_sampling import PatternSampler
 from our_train_and_generate import parrallelize_flows
 import argparse
 import pandas as pd

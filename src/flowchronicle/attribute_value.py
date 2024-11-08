@@ -1,6 +1,6 @@
 from __future__ import annotations
 from enum import Enum
-from dataloader import Dataset
+from flowchronicle.dataloader import Dataset
 
 class AttributeType(Enum):
     FIX = 1

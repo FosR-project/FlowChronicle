@@ -9,8 +9,8 @@ import copy
 import numpy as np
 import pandas as pd
 from sklearn.neighbors import KernelDensity
-from dataloader import reconstruct_bytes
-from attribute_value import AttributeType, AttributeValue
+from flowchronicle.dataloader import reconstruct_bytes
+from flowchronicle.attribute_value import AttributeType, AttributeValue
 from scipy.optimize import minimize
 
 class MarginalSampler():

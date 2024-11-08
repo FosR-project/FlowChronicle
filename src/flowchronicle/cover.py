@@ -8,12 +8,12 @@ warnings.simplefilter('once', UserWarning)
 import logging
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 import math
-import mdl_util
 
-from dataloader import Dataset
-from pattern import Pattern, EmptyPattern
-from window import Window, EmptyWindow
-from bayesian_network import BayesianNetwork
+from flowchronicle import mdl_util
+from flowchronicle.dataloader import Dataset
+from flowchronicle.pattern import Pattern, EmptyPattern
+from flowchronicle.window import Window, EmptyWindow
+from flowchronicle.bayesian_network import BayesianNetwork
 import random
 
 class Cover:

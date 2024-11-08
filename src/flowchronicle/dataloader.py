@@ -5,8 +5,8 @@ import numpy as np
 import pandas.api.types as ptypes
 from bidict import bidict
 from copy import deepcopy
-import domain_knowledge
-from preprocess import optimize_gmm, bytes_to_int, time_to_int
+from flowchronicle import domain_knowledge
+from flowchronicle.preprocess import optimize_gmm, bytes_to_int, time_to_int
 from sklearn.mixture import GaussianMixture
 
 
@@ -183,6 +183,9 @@ def load_train_set(sample_size=None):
 
     return df
 
+
+# FIXME remove
+
 def load_cicids17(sample_size=None):
     df = pd.read_csv('data/CIDDS_001_train.csv')
     df= df.head(sample_size) if sample_size is not None else df
@@ -191,6 +194,8 @@ def load_cicids17(sample_size=None):
     df.loc[df['Proto'] == 'ICMP', 'DstPort'] = df.loc[df['Proto'] == 'ICMP', 'DstPort'].astype(int)
 
     return df
+
+# FIXME remove
 
 def preprocess_socbed_bi(data, first_attack_ts, end_ts=None, sample_size=None, precition=100):
     #TODO return necessary information to transform data back, so discretization can be reversed
@@ -214,6 +219,8 @@ def preprocess_socbed_bi(data, first_attack_ts, end_ts=None, sample_size=None, p
     df.reset_index(inplace=True, drop=True)
 
     return df
+
+# FIXME remove
 
 def preprocess_IoT_dataset(data, first_attack_ts, end_ts=None, sample_size=None, precition=100):
     #TODO return necessary information to transform data back, so discretization can be reversed

@@ -1,7 +1,7 @@
-from dataloader import Dataset
-import window
-from attribute_value import AttributeValue, AttributeType
-import mdl_util
+from flowchronicle.dataloader import Dataset
+from flowchronicle import window
+from flowchronicle.attribute_value import AttributeValue, AttributeType
+from flowchronicle import mdl_util
 
 import copy
 

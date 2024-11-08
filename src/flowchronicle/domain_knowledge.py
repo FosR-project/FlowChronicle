@@ -1,6 +1,6 @@
 
 '''columns we never encode as fix values'''
-never_fix = ['Src IP Addr', 'Dst IP Addr']
+never_fix = ['Src IP Addr', 'Dst IP Addr'] # FIXME
 
 '''
 columns that are IP addresses, used for pattern extension

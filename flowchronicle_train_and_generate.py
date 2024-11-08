@@ -1,5 +1,5 @@
 import os
-import search
+from flowchronicle import search
 import argparse
 import time
 import logging
@@ -7,9 +7,9 @@ import warnings
 import pandas as pd
 import concurrent.futures
 
-import programs.dataloader as dl
-from programs.temporal_sampling import PatternSampler, FlowSampler
-from programs.model import ChunkyModel
+import flowchronicle.dataloader as dl
+from flowchronicle.temporal_sampling import PatternSampler, FlowSampler
+from flowchronicle.model import ChunkyModel
 
 def run_model_on_chunk_i(chunk, idx, model_name="No_Name"):
     #We return the index in order to keep the initial ordering at the end
@@ -44,6 +44,7 @@ def get_flows(patterns_chunk, col_name_map, columns_value_dict, cont_repr, times
             chunk_result = pd.concat([chunk_result, fl], axis=0)
     return chunk_result
 
+# TODO: in library?
 def parrallelize_flows(synthetic_patterns, col_name_map, columns_value_dict, cont_repr, timestamps, cpus = os.cpu_count()/4, idxs=None):
     #This function generated flow from a model
     synthetic_flows= []
@@ -52,7 +53,7 @@ def parrallelize_flows(synthetic_patterns, col_name_map, columns_value_dict, con
 
     # Creating chunks of synthetic_patterns
     chunks = [synthetic_patterns[i:i + chunk_size] for i in range(0, n, chunk_size)]
-    
+
     #Parralelization of the sampling
     with concurrent.futures.ProcessPoolExecutor(max_workers=int(cpus)) as executor:
         futures = [executor.submit(get_flows, chunk, col_name_map, columns_value_dict, cont_repr, timestamps, i*chunk_size, idxs) for i, chunk in enumerate(chunks)]
@@ -67,16 +68,14 @@ if __name__ == "__main__":
     parser.add_argument('--n_split', type=int, default=350, help='Number of splits for the dataset.')
     parser.add_argument('--save_model', action='store_true', help='Flag to save the model.')
     parser.add_argument('--path', type=str, default="data/", help='Path to the dataset and output files.')
-    
+
     args = parser.parse_args()
 
-    n_split = 350
+    n_split = args.n_split
     split = n_split > 0
-    save_model = True
-    
-    path = "data/"
+    save_model = args.save_model
 
-    print(path)
+    path = args.path
 
     t0 = time.time()
 
@@ -101,7 +100,7 @@ if __name__ == "__main__":
 
     c.fit_temporal_samplers(patterns_usage.keys())
     idx, synthetic_patterns = PatternSampler(patterns_usage).sample(sum(patterns_usage.values()), return_indices=True)
-    
+
     synthetic_df = parrallelize_flows(synthetic_patterns, c.dataset.col_name_map, c.dataset.column_value_dict, c.dataset.cont_repr, c.dataset.time_stamps, idxs=idx)
     synthetic_df = synthetic_df.sort_values('Date first seen')
 

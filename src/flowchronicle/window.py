@@ -6,9 +6,9 @@ import warnings
 warnings.simplefilter('once', UserWarning)
 
 
-import pattern
-from dataloader import Dataset
-from attribute_value import AttributeValue, AttributeType
+from flowchronicle import pattern
+from flowchronicle.dataloader import Dataset
+from flowchronicle.attribute_value import AttributeValue, AttributeType
 
 class Window:
     def __init__(self, ids:list[int], p:pattern.Pattern):

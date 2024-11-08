@@ -9,13 +9,13 @@ logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %
 
 import pickle
 
-import dataloader as dl
-from model import Model
-from pattern import Pattern
-from row_pattern import RowPattern
-from dataloader import Dataset
-from attribute_value import AttributeValue, AttributeType
-import our_globals
+import flowchronicle.dataloader as dl
+from flowchronicle.model import Model
+from flowchronicle.pattern import Pattern
+from flowchronicle.row_pattern import RowPattern
+from flowchronicle.dataloader import Dataset
+from flowchronicle.attribute_value import AttributeValue, AttributeType
+from flowchronicle import our_globals
 
 
 

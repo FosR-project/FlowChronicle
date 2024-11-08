@@ -8,9 +8,9 @@ import scipy
 
 import numpy as np
 
-from attribute_value import AttributeValue, AttributeType
-from dataloader import Dataset
-import mdl_util
+from flowchronicle.attribute_value import AttributeValue, AttributeType
+from flowchronicle.dataloader import Dataset
+from flowchronicle import mdl_util
 import collections
 
 class RowPattern: # describing a subset of the attributes of a row / flow
@@ -86,7 +86,7 @@ class RowPattern: # describing a subset of the attributes of a row / flow
     def value_encoding_cost(self, dataset:Dataset, col:int, value:int) -> float:
         return math.log2(len(dataset.value_prob[col]))
 
-    def get_encoding_cost(self, first:bool, dataset:Dataset, n_set_placeholders:int) -> float: 
+    def get_encoding_cost(self, first:bool, dataset:Dataset, n_set_placeholders:int) -> float:
         cost = 0.0
         # fix values
         columns = dataset.shape[1]

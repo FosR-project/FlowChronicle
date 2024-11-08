@@ -1,9 +1,9 @@
 from __future__ import annotations
-from pattern import Pattern, EmptyPattern
-import bayesian_network
-from cover import Cover
-import mdl_util
-from attribute_value import AttributeType, AttributeValue
+from flowchronicle.pattern import Pattern, EmptyPattern
+from flowchronicle import bayesian_network
+from flowchronicle.cover import Cover
+from flowchronicle import mdl_util
+from flowchronicle.attribute_value import AttributeType, AttributeValue
 
 import numpy as np
 

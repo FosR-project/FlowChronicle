@@ -1,11 +1,11 @@
 from __future__ import annotations
-import window
-from dataloader import Dataset
-from row_pattern import RowPattern
-from temporal_sampling import TemporalSampler
-import mdl_util
-import bayesian_network
-from attribute_value import AttributeValue, AttributeType
+from flowchronicle import window
+from flowchronicle.dataloader import Dataset
+from flowchronicle.row_pattern import RowPattern
+from flowchronicle.temporal_sampling import TemporalSampler
+from flowchronicle import mdl_util
+from flowchronicle import bayesian_network
+from flowchronicle.attribute_value import AttributeValue, AttributeType
 
 
 from typing import Optional
