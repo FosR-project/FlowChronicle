@@ -240,4 +240,9 @@ def search(dataset:Dataset, iter_max=np.inf, load_checkpoint=0, model_name='mode
                     logging.debug("added candidate %s" % best_candidate)
                     changes = True
                     break
+
+    # compute probabilities and not just counts
+    model.get_base_bn().fit()
+    for p in model.pattern_set:
+        p.bn.fit()
     return model
