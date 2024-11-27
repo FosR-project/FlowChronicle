@@ -6,7 +6,7 @@ import collections
 import warnings
 warnings.simplefilter('once', UserWarning)
 import logging
-logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
+# logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 import math
 
 from flowchronicle import mdl_util
@@ -167,7 +167,7 @@ class Cover:
     def remove_pattern(self,pattern):
         self.pattern_set.remove(pattern)
         pattern_windows = np.vectorize(lambda w:w != None and w.pattern == pattern)(self.cover_map)
-        print(pattern_windows)
+        # print(pattern_windows)
         self.cover_map[pattern_windows] = None
         self.__cache_data_length_cost = None
 

@@ -14,7 +14,7 @@ import copy
 import pandas as pd
 import numpy as np
 import logging
-logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
+# logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 
 class Pattern: # sequence of RowPatterns
     def __init__(self, pattern:list[RowPattern]):

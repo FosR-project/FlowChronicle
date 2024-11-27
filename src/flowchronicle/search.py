@@ -5,7 +5,7 @@ import numpy as np
 import copy
 from itertools import product, combinations
 import logging
-logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
+# logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 
 import pickle
 
@@ -179,7 +179,7 @@ def extend_patterns_rows(patterns:list[Pattern], dataset:Dataset) -> list[Patter
     return extended_patterns
 
 
-def search(dataset:Dataset, load_checkpoint=0, model_name='model', load_path=None) -> Model:
+def search(dataset:Dataset, iter_max=np.inf, load_checkpoint=0, model_name='model', load_path=None) -> Model:
     init_patterns = build_inital_patterns(dataset)
     single_attribute_patterns = build_single_attribute_patterns(dataset)
     map(lambda x: x.get_candidate_score(dataset), init_patterns) #only compute it once
@@ -192,7 +192,7 @@ def search(dataset:Dataset, load_checkpoint=0, model_name='model', load_path=Non
     tested_candidates = set()
     changes = True
 
-    DEBUG_ITERATION_LIMIT = np.inf
+    DEBUG_ITERATION_LIMIT = iter_max
     search_mode = our_globals.START_SEARCH_MODE
     '''
     0 - single row only
@@ -241,12 +241,3 @@ def search(dataset:Dataset, load_checkpoint=0, model_name='model', load_path=Non
                     changes = True
                     break
     return model
-
-
-if __name__ == '__main__':
-    df = dl.load_socbed_bi()
-    dataset = Dataset(df.copy())
-    m = search(dataset)
-    for p in m.get_patterns():
-        print(p)
-    pickle.dump(m, open('model.pkl', 'wb'))
