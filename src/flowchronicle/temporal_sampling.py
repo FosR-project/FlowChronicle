@@ -115,15 +115,18 @@ class FlowSampler():
         #synthetic_df.dropna(inplace=True, axis=1)
 
         set_placeholders = [val for val in res.stack().unique() if str(val).split(":")[0] == str(AttributeType.SET_PLACEHOLDER)]
+        placeholders_nbrs = {}
+        [placeholders_nbrs.setdefault(str(i).split(":")[1], i) for i in set_placeholders]
         use_placeholders = [val for val in res.stack().unique() if str(val).split(":")[0] == str(AttributeType.USE_PLACEHOLDER)]
+        use_placeholders_ref = {i:str(i).split(":")[1] for i in use_placeholders}
         placeholders_values = [synthetic_df.iloc[i, j] for value in set_placeholders for i, j in zip(*np.where(res == value))]
         placeholders = dict(zip(set_placeholders, placeholders_values))
-        use_placeholders_idx = [res.stack()[res.stack() == item].index[0] for item in set_placeholders]
+        d={key: res.stack()[res.stack() == placeholders_nbrs[value]].index[0] for key, value in use_placeholders_ref.items()}
         res.replace(placeholders, inplace=True)
 
         result = synthetic_df.fillna(res)
         result.replace(self.column_value_dict,inplace=True)
-        d = dict(zip(use_placeholders, [result.loc[idx] for idx in use_placeholders_idx]))
+        d = {key: result.loc[value] for key, value in d.items()}
         result.replace(d, inplace=True)
         #result['Date first seen'] = pd.Series(self.timestamps)/self.dataset.cont_repr.get_time_precision()
         result['Date first seen'] = pd.Series(self.timestamps)/self.cont_repr.get_time_precision()
